@@ -1,0 +1,23 @@
+name: Blog SSH CD
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH and build 
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /opt/blog-ssh-cd/blog-ssh-cd
+            git checkout main
+            git pull
+            npm i
+            npm run build
+            npm start
