@@ -10,9 +10,9 @@ jobs:
       - name: SSH and build
         uses: appleboy/ssh-action@v1
         with:
-          host: 192.168.127.129
-          username: trungma
-          password: trungma
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
           port: 22
           script: |
             cd /opt/blog-ssh-cd/blog-ssh-cd
